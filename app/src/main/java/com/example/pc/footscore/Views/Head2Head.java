@@ -54,7 +54,7 @@ public class Head2Head extends AppCompatActivity implements SwipeRefreshLayout.O
             @Override
             public void onResponse(Call<Head2head> call, Response<Head2head> response) {
 
-                List<Fixture_> list = (List<Fixture_>) response.body().getFixtures();
+                List<Fixture_> list =  response.body().getFixtures();
                 rv.setAdapter(new headsAdapter(list));
             }
 
