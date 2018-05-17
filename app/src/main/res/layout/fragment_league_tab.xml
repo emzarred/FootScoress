@@ -1,0 +1,94 @@
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/fragment_page_rootview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context="com.example.pc.footscore.Controllers.Fragments.CompetitionFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:background="@android:color/background_light">
+
+
+            <TextView
+                android:id="@+id/pos"
+                android:layout_width="34dp"
+                android:layout_height="46dp"
+
+                android:background="@android:color/holo_green_dark"
+                android:text="Pos"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_light"
+                tools:background="@android:color/holo_green_dark"/>
+
+            <TextView
+                android:id="@+id/caption"
+                android:layout_width="145dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/holo_green_dark"
+                android:backgroundTint="@android:color/holo_green_dark"
+                android:text="Name"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_light"/>
+
+            <TextView
+                android:id="@+id/mp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/holo_green_dark"
+                android:backgroundTint="@android:color/holo_green_dark"
+                android:ems="10"
+                android:text="MP"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_light"/>
+
+            <TextView
+                android:id="@+id/goals"
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/holo_green_dark"
+
+                android:backgroundTint="@android:color/holo_green_dark"
+                android:ems="10"
+                android:text="Goals"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_light"/>
+
+            <TextView
+                android:id="@+id/points"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/holo_green_dark"
+                android:textAlignment="center"
+
+                android:backgroundTint="@android:color/holo_green_dark"
+                android:ems="10"
+                android:text="Points"
+                android:textColor="@android:color/background_light"
+                tools:backgroundTint="@android:color/holo_green_dark"/>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+
+    </LinearLayout>
+</android.support.v4.widget.SwipeRefreshLayout>
+
