@@ -1,6 +1,7 @@
 package com.example.pc.footscore.Controllers.Fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -45,7 +46,7 @@ public class CompetitionFragment extends Fragment implements SwipeRefreshLayout.
     private static final String KEY_POSITION = "position";
     private static final String KEY_COLOR = "color";
 
-
+private Context context;
     public CompetitionFragment() {
     }
 
@@ -61,6 +62,7 @@ public class CompetitionFragment extends Fragment implements SwipeRefreshLayout.
         args.putInt(KEY_POSITION, position);
 
         frag.setArguments(args);
+
 
         return (frag);
     }

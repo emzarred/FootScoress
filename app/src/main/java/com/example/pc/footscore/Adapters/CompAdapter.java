@@ -1,6 +1,8 @@
 package com.example.pc.footscore.Adapters;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,18 +21,22 @@ import java.util.List;
  */
 
 
-public  class CompAdapter extends RecyclerView.Adapter {
+public class CompAdapter extends RecyclerView.Adapter {
     private List<Competition> list;
 
-    public CompAdapter(List<Competition> list)
-    {
+
+    public CompAdapter(List<Competition> list) {
         this.list = list;
+
+
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.comp_cell, parent, false);
         return new CompAdapter.ViewHolder(view);
+
     }
 
 
@@ -38,9 +44,11 @@ public  class CompAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Competition competition = list.get(position);
 
-        CompAdapter.ViewHolder.caption.setText(competition.getCaption() +  "(" + String.valueOf(competition.getCurrentMatchday()) +"/" + String.valueOf(competition.getNumberOfMatchdays()) + ")");
-ViewHolder.Id= competition.getId();
+        CompAdapter.ViewHolder.caption.setText(competition.getCaption() + "(" + String.valueOf(competition.getCurrentMatchday()) + "/" + String.valueOf(competition.getNumberOfMatchdays()) + ")");
+        ViewHolder.Id = competition.getId();
+
     }
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -59,7 +67,7 @@ ViewHolder.Id= competition.getId();
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         static TextView caption;
-public static int Id;
+        public static int Id;
 
         public ViewHolder(View v) {
             super(v);
@@ -68,8 +76,10 @@ public static int Id;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent=new Intent(itemView.getContext(),DetailActivity.class);
-                    intent.putExtra("id",Id);
+
+
+                    Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
+
                     itemView.getContext().startActivity(intent);
                 }
             });
@@ -78,7 +88,6 @@ public static int Id;
         }
 
     }
-
 
 
 }

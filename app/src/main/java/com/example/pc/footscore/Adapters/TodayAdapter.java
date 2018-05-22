@@ -3,6 +3,8 @@ package com.example.pc.footscore.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.SurfaceView;
 import android.widget.ViewAnimator;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +26,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static android.app.PendingIntent.getActivity;
+import static android.content.Context.MODE_PRIVATE;
 import static android.support.constraint.solver.widgets.ConstraintWidget.GONE;
 
 /**
@@ -31,6 +34,8 @@ import static android.support.constraint.solver.widgets.ConstraintWidget.GONE;
  */
 
 public class TodayAdapter extends RecyclerView.Adapter {
+    private Context mContext;
+    SharedPreferences sharedPreferences;
     private List<Fixture> list;
     // private List<Result> listR;
     public TodayAdapter(List<Fixture> list) {
@@ -52,7 +57,7 @@ public class TodayAdapter extends RecyclerView.Adapter {
     @SuppressLint("WrongConstant")
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Fixture fixture = list.get(position);
+        final Fixture fixture = list.get(position);
 
         String c = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 if((fixture.getDate().substring(0,Math.min(fixture.getDate().length(),10)).equals(c)   )){
@@ -68,6 +73,25 @@ if((fixture.getDate().substring(0,Math.min(fixture.getDate().length(),10)).equal
     ViewHolder.check.setVisibility(View.GONE);
     ViewHolder.devider.setVisibility(GONE);
 ViewHolder.msg.setText("there is no matches for today");}
+ViewHolder.check.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        if(ViewHolder.check.isChecked()){
+            sharedPreferences = mContext.getSharedPreferences("DataList", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+
+
+            editor.putString("date",fixture.getDate().substring(11,19));
+            editor.putString("home",fixture.getHomeTeamName());
+            editor.putString("score",fixture.getStatus());
+            editor.putString("away",fixture.getAwayTeamName());
+            editor.apply();
+        }
+
+    }
+});
+
 
 
 
@@ -114,6 +138,7 @@ ViewHolder.msg.setText("there is no matches for today");}
                     itemView.getContext().startActivity(intent);
                 }
             });
+
         }
     }
 }

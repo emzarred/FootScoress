@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pc.footscore.Adapters.FavoritAdapter;
+import com.example.pc.footscore.Models.Fixture;
 import com.example.pc.footscore.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import static android.support.constraint.solver.widgets.ConstraintWidget.GONE;
@@ -27,7 +32,12 @@ public class FavoritFragment extends Fragment implements SwipeRefreshLayout.OnRe
     static TextView TvDate, TvHome, TvAway, TvScore,msg;
     static CheckBox check;
     static View devider;
+    private List<Fixture>list;
+    private RecyclerView rv;
+
     private SwipeRefreshLayout spr;
+
+
 
 
     public FavoritFragment() {
@@ -60,21 +70,12 @@ public class FavoritFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         // 4 - Get widgets from layout and serialise it
         LinearLayout rootView = (LinearLayout) result.findViewById(R.id.fragment_page_rootview);
-        TvDate = (TextView) result.findViewById(R.id.TvDate);
-        TvHome = (TextView) result.findViewById(R.id.TvHome);
-        TvScore = (TextView) result.findViewById(R.id.TvScore);
-        TvAway = (TextView) result.findViewById(R.id.TvAway);
-        check = (CheckBox) result.findViewById(R.id.checkBox);
-        devider = (View) result.findViewById(R.id.devider);
-        msg=(TextView)result.findViewById(R.id.msg);
-        msg.setText("");
+rv=(RecyclerView)result.findViewById(R.id.list);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        rv.setAdapter(new FavoritAdapter(list));
 
 
-
-        spr = (SwipeRefreshLayout) result.findViewById(R.id.swipe);
-        spr.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) this);
-
-        if (check.isChecked() == false) {
+       /* if (check.isChecked() == false) {
             TvDate.setVisibility(View.GONE);
             TvHome.setVisibility(View.GONE);
             TvScore.setVisibility(View.GONE);
@@ -82,8 +83,14 @@ public class FavoritFragment extends Fragment implements SwipeRefreshLayout.OnRe
             check.setVisibility(View.GONE);
             devider.setVisibility(GONE);
 
-            msg.setText("No Matches Selected");
-        }
+            msg.setText("No Matches Selected");*/
+
+
+
+        spr = (SwipeRefreshLayout) result.findViewById(R.id.swipe);
+        spr.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) this);
+
+
 
         // String c= String.valueOf(d.getDate());
 
@@ -112,14 +119,18 @@ public class FavoritFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 spr.setRefreshing(false);
             }
         }, 2000);
-        if (check.isChecked() == false) {
+
+       /* if (check.isChecked() == false) {
             TvDate.setVisibility(View.GONE);
             TvHome.setVisibility(View.GONE);
             TvScore.setVisibility(View.GONE);
             TvAway.setVisibility(View.GONE);
             check.setVisibility(View.GONE);
             devider.setVisibility(GONE);
-            msg.setText("No Matches Selected");}
+
+            msg.setText("No Matches Selected");*/
+
+
 
     }
 }

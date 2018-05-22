@@ -1,7 +1,9 @@
 package com.example.pc.footscore.Controllers.Fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.example.pc.footscore.Adapters.CompAdapter;
 import com.example.pc.footscore.Adapters.TeamAdapter;
 import com.example.pc.footscore.Models.Team;
 import com.example.pc.footscore.Models.Teams;
@@ -23,6 +27,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+
+import static com.example.pc.footscore.Adapters.TeamAdapter.context;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,11 +50,13 @@ public class TeamFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private static final String KEY_COLOR="color";
 
 
-    public TeamFragment() { }
+    public TeamFragment() {
+    }
+
 
 
     // 2 - Method that will create a new instance of CompetitionFragment, and add data to its bundle.
-    public static TeamFragment newInstance(int position, int color) {
+    public static  TeamFragment newInstance(int position, int color) {
 
         // 2.1 Create new fragment
         TeamFragment frag = new TeamFragment();
@@ -58,6 +66,8 @@ public class TeamFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         args.putInt(KEY_POSITION, position);
         args.putInt(KEY_COLOR, color);
         frag.setArguments(args);
+
+
 
         return(frag);
     }
@@ -102,7 +112,7 @@ public class TeamFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         final ApiInterface cmp = retrofit.create(ApiInterface.class);
 
-        Call<Teams> call = cmp.getAllTeams(445);
+        Call<Teams> call = cmp.getAllTeams(404);
         Log.d("TeamView", "onResponse: "+call);
         call.enqueue(new Callback<Teams>() {
             @Override
